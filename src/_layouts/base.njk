@@ -117,6 +117,23 @@
 	{% if env.DEBUG_SECTIONS=='true' -%}
 		<style>{{ css_debug | cssmin | safe }}</style>
 	{%- endif %}
+	{# ~~~~~ Global site tag (gtag.js) - Google Analytics / Tag Manager ~~~~~ #}
+{# Google tag (gtag.js) - load ONCE #}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9YNH5T7XVQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  // GA4
+  gtag('config', 'G-9YNH5T7XVQ');
+
+  // Google Ads
+  gtag('config', 'AW-17593011004');
+
+  // If you also want to keep the “other account” GA4 on the same site:
+  // gtag('config', 'G-OTHERXXXXXXX');
+</script>
 
   </head>
 
@@ -186,18 +203,6 @@
 		</script>
 		<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{env.FACEBOOK_PIXEL_ID}}&ev=PageView&noscript=1"/></noscript>
 	{% endif %}
-
-	{# ~~~~~ Global site tag (gtag.js) - Google Analytics / Tag Manager ~~~~~ #}
-	{% if env.GA_KEY %}
-		{% set google %}
-			{% include "js/google_analytics.js" %}
-		{% endset %}
-		<script>
-			{{ google | jsmin | safe }}
-			googleAnalytics('{{ env.GA_KEY }}');
-			addLoadEvent(function() { loadScript("https://www.googletagmanager.com/gtag/js?id={{ env.GA_KEY }}", null, null, true); });
-		</script>
-    {% endif %}
 
 
 	{# ~~~~~ Microsoft Clarity (Analytics) ~~~~~ #}
